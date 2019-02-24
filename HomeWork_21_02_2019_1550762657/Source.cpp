@@ -37,9 +37,9 @@ double func2(double x)
 	return x * 2 + 4;
 }
 
-void acumArray(double(*funcPtr)(double) , double a, double b)
+void printFuncDiap(double(*funcPtr)(double) , double a, double b)
 {
-	double step = (b - a) / 10;
+	double step = 1; //(b - a) / 10;
 	
 	cout << "\n Значения по оси x - > ";
 
@@ -144,11 +144,8 @@ void Task2()
 
 	*funcPtr = funcPtr[choice - 1];
 
-	acumArray((*funcPtr),  a,  b);
+	printFuncDiap((*funcPtr),  a,  b);
 	
-	//cout << endl << "Результат : " << funcPtr[choice - 1] << endl;
-
-
 }
 
 
@@ -188,4 +185,6 @@ int main()
 		cin >> flag;
 
 	} while (flag == 'y');
+
+	return 0;
 }
