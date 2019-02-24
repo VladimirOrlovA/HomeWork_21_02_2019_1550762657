@@ -160,7 +160,7 @@ void Task2()
 int main()
 {
 	SetConsoleTextAttribute(hConsole, 10);
-	cout << "\n Orlov Vladimir HomeWork_19_02_2019_1550591366 \n\n";
+	cout << "\n Orlov Vladimir HomeWork_21_02_2019_1550762657 \n\n";
 	SetConsoleTextAttribute(hConsole, 7);
 
 
