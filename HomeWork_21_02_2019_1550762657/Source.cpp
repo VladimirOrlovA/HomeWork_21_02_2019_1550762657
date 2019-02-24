@@ -37,9 +37,24 @@ double func2(double x)
 	return x * 2 + 4;
 }
 
-double acumArray(double *funcPtr, double a, double b)
+void acumArray(double(*funcPtr)(double) , double a, double b)
 {
-	for(a)
+	double step = (b - a) / 10;
+	
+	cout << "\n Значения по оси x - > ";
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << (a + step * i) << "  ";
+	}
+
+
+	cout << "\n Значения по оси y - > ";
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << funcPtr(a+step*i)<<"  ";
+	}
 }
 
 
@@ -101,9 +116,10 @@ void Task2()
 	cout << "\n--------------------------------------------------------------------------\n\nTask2\n\n";
 	SetConsoleTextAttribute(hConsole, 7);
 
-	double x, a, b;
+	double a, b;
 
-	double(*funcPtr[2])(double) = { func1, func2};
+	double(*funcPtr[2])(double) = { func1, func2 };
+	
 
 	cout << "Введите диапозон значений от ( a ) до ( b )" << "\n\n-> ";
 	cin >> a >> b;
@@ -126,7 +142,11 @@ void Task2()
 			cout << "Выбранной операции нет, повторите выбор...\n";
 	}
 
-	cout << endl << "Результат : " << funcPtr[choice - 1](a) << endl;
+	*funcPtr = funcPtr[choice - 1];
+
+	acumArray((*funcPtr),  a,  b);
+	
+	//cout << endl << "Результат : " << funcPtr[choice - 1] << endl;
 
 
 }
