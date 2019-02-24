@@ -4,7 +4,7 @@
 #include<Windows.h>
 #include<cmath>
 
-#define Pi 3.14159265;
+#define Pi 3.14159265
 
 using namespace std;
 
@@ -23,13 +23,13 @@ double cub(double a)
 
 double sinus(double a)
 {
-	return sin (a * 3.14159265 / 180);
+	return sin (a * Pi / 180);
 }
 
 
 double func1(double x)
 {
-	return x * 2;
+	return (x) * 2;
 }
 
 double func2(double x)
@@ -37,23 +37,25 @@ double func2(double x)
 	return x * 2 + 4;
 }
 
-void printFuncDiap(double(*funcPtr)(double) , double a, double b)
+void printFuncDiap(double(*funcPtr)(double) , double a, double b, double x)
 {
-	double step = 1; //(b - a) / 10;
+	double step = (b - a) / 9;					// определяем (шаг) дискретизацию (или цену деления) для расчета 10 точек в диапозоне от "a" до "b"
+	
+	a += x;										// определение значения "x" на первой границе диапозона заданной значением "а"
 	
 	cout << "\n Значения по оси x - > ";
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i != 10; i++)				// выводим значения 10 точек "x"
 	{
-		cout << (a + step * i) << "  ";
+		cout << (a + step * i) << "\t";
 	}
 
 
 	cout << "\n Значения по оси y - > ";
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i != 10; i++)				// выводим значения 10 точек "y" через цикл и вызов в нем выбранной функции расчета значения "y"
 	{
-		cout << funcPtr(a+step*i)<<"  ";
+		cout << funcPtr(a+step*i)<<"\t";		
 	}
 }
 
@@ -116,13 +118,18 @@ void Task2()
 	cout << "\n--------------------------------------------------------------------------\n\nTask2\n\n";
 	SetConsoleTextAttribute(hConsole, 7);
 
-	double a, b;
+	double x, a, b;
 
-	double(*funcPtr[2])(double) = { func1, func2 };
+	double(*funcPtr[2])(double) = { func1, func2 };							// указатель с массивом содержащим значения адресов функций для расчета y
 	
+	cout << "Введите значение ( x )" << "\n\n-> ";
+	cin >> x;
+	cout << endl;
 
 	cout << "Введите диапозон значений от ( a ) до ( b )" << "\n\n-> ";
-	cin >> a >> b;
+	cin >> a;
+	cout<< "\n\n-> ";
+	cin	>> b;
 	cout << endl;
 
 
@@ -132,19 +139,19 @@ void Task2()
 	
 	int choice = -1;
 
-	while (choice < 1 || choice > 2)
+	while (choice < 1 || choice > 2)										// меню для выбора адреса функции, в массиве указателе для расчета координаты y
 	{
 		cout << "\n-> ";
 		cin >> choice;
 		cout << endl;
 
 		if (choice < 1 || choice > 2)
-			cout << "Выбранной операции нет, повторите выбор...\n";
+			cout << "Выбранной функции под эти номером нет, повторите выбор...\n";
 	}
 
-	*funcPtr = funcPtr[choice - 1];
+	*funcPtr = funcPtr[choice - 1];											// присваиваем адрес выбранной функции через указатель 
 
-	printFuncDiap((*funcPtr),  a,  b);
+	printFuncDiap((*funcPtr), a, b, x);										// вызываем функцию вывода на экран координат "x" и "y"
 	
 }
 
