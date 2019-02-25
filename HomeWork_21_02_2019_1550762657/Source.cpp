@@ -29,7 +29,7 @@ double sinus(double a)
 
 double func1(double x)
 {
-	return (x) * 2;
+	return pow(x,2);
 }
 
 double func2(double x)
@@ -37,13 +37,10 @@ double func2(double x)
 	return x * 2 + 4;
 }
 
-void printFuncDiap(double(*funcPtr)(double) , double a, double b, double x)
+void printFuncDiap(double(*funcPtr)(double) , double a, double b)
 {
 	double step = (b - a) / 10;					// определяем (шаг) дискретизацию (или цену деления) для расчета 10 точек в диапозоне от "a" до "b"
 	
-	if (x < a) a = x + a;						// определение значения "x" на первой границе диапозона заданной значением "а"
-	else a = x - a;
-
 	cout << "\n Значения по оси x - > ";
 
 	for (int i = 0; i != 10; i++)				// выводим значения 10 точек "x"
@@ -119,14 +116,10 @@ void Task2()
 	cout << "\n--------------------------------------------------------------------------\n\nTask2\n\n";
 	SetConsoleTextAttribute(hConsole, 7);
 
-	double x, a, b;
+	double a, b;
 
 	double(*funcPtr[2])(double) = { func1, func2 };							// указатель с массивом содержащим значения адресов функций для расчета y
 	
-	cout << "Введите значение ( x )" << "\n\n-> ";
-	cin >> x;
-	cout << endl;
-
 	cout << "Введите диапозон значений от ( a ) до ( b )" << "\n\n-> ";
 	cin >> a;
 	cout<< "-> ";
@@ -135,7 +128,7 @@ void Task2()
 
 
 	cout << "Выберите функцию для расчета координат точек x и y : \n" << endl;
-	cout << "(1) - функция y = x*2" << endl;
+	cout << "(1) - функция y = x^2" << endl;
 	cout << "(2) - функция y = x*2+4" << endl;
 	
 	int choice = -1;
@@ -152,7 +145,7 @@ void Task2()
 
 	*funcPtr = funcPtr[choice - 1];											// присваиваем адрес выбранной функции через указатель 
 
-	printFuncDiap((*funcPtr), a, b, x);										// вызываем функцию вывода на экран координат "x" и "y"
+	printFuncDiap((*funcPtr), a, b);										// вызываем функцию вывода на экран координат "x" и "y"
 	
 }
 
